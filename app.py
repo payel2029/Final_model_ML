@@ -1,10 +1,28 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 import joblib
 import numpy as np
 
 app = FastAPI()
 
+# ---------------- CORS ----------------
+origins = [
+    "https://ornate-panda-3e6e34.netlify.app",  # Netlify site URL
+    "http://localhost:5173",  # optional local dev
+    # "*" can be used to allow all origins (not recommended for production)
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+# -------------------------------------
+
+# Load model
 model = joblib.load("maternal_pipeline.pkl")
 
 class InputData(BaseModel):
@@ -32,4 +50,3 @@ def predict(data: InputData):
     pred = model.predict(X)[0]
 
     return {"prediction": int(pred)}
-
