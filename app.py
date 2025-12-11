@@ -22,7 +22,7 @@ app.add_middleware(
 # -------------------------------------
 
 # Load updated pipeline
-model = joblib.load("maternal_LGBM_pipeline.pkl")
+model = joblib.load("maternal_LGBM02_pipeline.pkl")
 
 # ---------------- Input Schema ----------------
 class InputData(BaseModel):
@@ -67,3 +67,4 @@ def predict(data: InputData):
         "prediction": int(pred_class),
         "probabilities": pred_proba.tolist()   # convert numpy array to list for JSON
     }
+
