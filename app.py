@@ -8,8 +8,8 @@ app = FastAPI()
 
 # ---------------- CORS ----------------
 origins = [
-    "https://ornate-panda-3e6e34.netlify.app",  # Netlify site URL
-    "http://localhost:5173",                     # local dev
+    "https://ornate-panda-3e6e34.netlify.app",  
+    "http://localhost:5173",                    
 ]
 
 app.add_middleware(
